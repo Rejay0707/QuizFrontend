@@ -21,6 +21,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const WelcomeCard = ({ onGetStarted }) => {
+  
   const classes = useStyles();
 
   return (
