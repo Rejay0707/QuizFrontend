@@ -18,6 +18,7 @@ const CategoryComponent = () => {
       setLoading(true);
       try {
         const response = await axios.get(`${BASE_URL}/api/category`);
+        console.log(response)
         setCategories(response.data);
       } catch (error) {
         setError(error.message);
@@ -82,7 +83,7 @@ const CategoryComponent = () => {
             height={280}
           />
           <div>
-            <Button variant="contained" style={{ width: 450 }}>
+            <Button variant="contained" style={{ width: 450 }} onClick={() => SelectButton(category._id)}>
               Select
             </Button>
           </div>

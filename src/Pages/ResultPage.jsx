@@ -1,8 +1,9 @@
 import React from 'react'
+import ResultCard from '../Components/ResultComponent'
 
 const ResultPage = () => {
   return (
-    <div>ResultPage</div>
+    <ResultCard />
   )
 }
 
