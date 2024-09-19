@@ -1,28 +1,8 @@
-import { makeStyles } from "@material-ui/core";
-import { Card, CardContent, Typography, Button } from "@material-ui/core";
+import { Card, CardContent, Typography, Button } from "@mui/material";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-const useStyles = makeStyles((theme) => ({
-  backgroundImage: {
-    backgroundImage:
-      "url(https://www.shutterstock.com/image-vector/falling-bright-shiny-silver-confetti-260nw-1664817490.jpg)",
-    backgroundSize: "cover",
-    height: "100vh",
-    width: "100vw",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  cardContainer: {
-    width: 500,
-    height: 320,
-    margin: "auto",
-  },
-}));
-
 const ResultCard = () => {
-  const classes = useStyles();
   const navigate = useNavigate();
 
   const player1Name = useSelector((state) => state.playerName.playerName);
@@ -40,12 +20,29 @@ const ResultCard = () => {
   }
 
   const goToHomePage = () => {
-    navigate("/"); 
+    navigate("/");
   };
 
   return (
-    <div className={classes.backgroundImage}>
-      <Card className={classes.cardContainer}>
+    <div
+      style={{
+        backgroundImage:
+          "url(https://www.shutterstock.com/image-vector/falling-bright-shiny-silver-confetti-260nw-1664817490.jpg)",
+        backgroundSize: "cover",
+        height: "100vh",
+        width: "100vw",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <Card
+        sx={{
+          width: 500,
+          height: 320,
+          margin: "auto",
+        }}
+      >
         <CardContent>
           <Typography variant="h5" component="h2">
             Congratulations to both players!
@@ -54,7 +51,7 @@ const ResultCard = () => {
             variant="body2"
             color="textSecondary"
             component="p"
-            style={{ paddingTop: 20 }}
+            sx={{ paddingTop: 2 }}
           >
             {player1Name}'s Score: {player1Score}
           </Typography>
@@ -62,7 +59,7 @@ const ResultCard = () => {
             variant="body2"
             color="textSecondary"
             component="p"
-            style={{ paddingTop: 10 }}
+            sx={{ paddingTop: 1 }}
           >
             {player2Name}'s Score: {player2Score}
           </Typography>
@@ -70,14 +67,14 @@ const ResultCard = () => {
             variant="h6"
             color="textPrimary"
             component="p"
-            style={{ paddingTop: 20, fontWeight: "bold" }}
+            sx={{ paddingTop: 2, fontWeight: "bold" }}
           >
             {winnerMessage}
           </Typography>
           <Button
             variant="contained"
             color="primary"
-            style={{ float: "right", marginTop: 20 }}
+            sx={{ float: "right", marginTop: 2 }}
             onClick={goToHomePage}
           >
             Go to Home Page

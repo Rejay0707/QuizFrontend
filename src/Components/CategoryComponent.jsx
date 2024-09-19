@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { BASE_URL } from "../Constants.js";
-import { Button } from "@material-ui/core";
+import { Button } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { setID } from "../Slices/CategoryIDSlice.js";
 import { useNavigate } from "react-router-dom";
@@ -18,7 +18,7 @@ const CategoryComponent = () => {
       setLoading(true);
       try {
         const response = await axios.get(`${BASE_URL}/api/category`);
-        console.log(response)
+        console.log(response);
         setCategories(response.data);
       } catch (error) {
         setError(error.message);
@@ -45,7 +45,7 @@ const CategoryComponent = () => {
 
   return (
     <div style={{ paddingLeft: 30 }}>
-      {categories.slice(0, 3).map((category, index) => (
+      {categories.slice(0, 3).map((category) => (
         <div
           key={category._id}
           style={{ display: "inline-block", marginRight: 20 }}
@@ -70,7 +70,7 @@ const CategoryComponent = () => {
       ))}
 
       <br />
-      {categories.slice(3).map((category, index) => (
+      {categories.slice(3).map((category) => (
         <div
           key={category._id}
           style={{ display: "inline-block", marginRight: 20 }}
@@ -83,7 +83,11 @@ const CategoryComponent = () => {
             height={280}
           />
           <div>
-            <Button variant="contained" style={{ width: 450 }} onClick={() => SelectButton(category._id)}>
+            <Button
+              variant="contained"
+              style={{ width: 450 }}
+              onClick={() => SelectButton(category._id)}
+            >
               Select
             </Button>
           </div>

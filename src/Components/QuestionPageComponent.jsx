@@ -1,69 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { makeStyles } from "@material-ui/core";
-import { Card, CardContent, Typography, Button } from "@material-ui/core";
+import { Card, CardContent, Typography, Button } from "@mui/material";
 import axios from "axios";
 import { BASE_URL } from "../Constants.js";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import { setPlayerOneScore } from "../Slices/Player1ScoreSlice.js";
 import { setPlayerTwoScore } from "../Slices/Player2ScoreSlice.js";
 
-const useStyles = makeStyles((theme) => ({
-  backgroundImage: {
-    backgroundImage:
-      "url(https://images.pexels.com/photos/34225/spider-web-with-water-beads-network-dewdrop.jpg?cs=srgb&dl=pexels-pixabay-34225.jpg&fm=jpg)",
-    backgroundSize: "cover",
-    height: "100vh",
-    width: "100vw",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    position: "relative",
-  },
-  cardContainer: {
-    width: 500,
-    height: 280,
-    margin: "auto",
-  },
-  playerName: {
-    position: "absolute",
-    top: 20,
-    left: 20,
-    color: "white",
-    fontSize: "20px",
-    fontWeight: "bold",
-  },
-  playerScore: {
-    position: "absolute",
-    top: 20,
-    right: 20,
-    color: "white",
-    fontSize: "20px",
-    fontWeight: "bold",
-  },
-  difficultyLevel: {
-    position: "absolute",
-    top: 20,
-    left: "50%",
-    transform: "translateX(-50%)",
-    color: "white",
-    fontSize: "20px",
-    fontWeight: "bold",
-  },
-  correct: {
-    backgroundColor: "lightgreen",
-  },
-  incorrect: {
-    backgroundColor: "lightcoral",
-  },
-  neutral: {
-    backgroundColor: "transparent",
-  },
-}));
-
 const QuestionCard = () => {
-  const classes = useStyles();
   const [questions, setQuestions] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -117,19 +61,19 @@ const QuestionCard = () => {
     if (option === questions[currentQuestion].correctAnswer) {
       if (isPlayer1Turn) {
         const newPlayer1Score = player1Score + points;
-        setPlayer1Score(newPlayer1Score); 
-        dispatch(setPlayerOneScore(newPlayer1Score)); 
+        setPlayer1Score(newPlayer1Score);
+        dispatch(setPlayerOneScore(newPlayer1Score));
       } else {
         const newPlayer2Score = player2Score + points;
-        setPlayer2Score(newPlayer2Score); 
-        dispatch(setPlayerTwoScore(newPlayer2Score)); 
+        setPlayer2Score(newPlayer2Score);
+        dispatch(setPlayerTwoScore(newPlayer2Score));
       }
     }
   };
 
   const handleSubmit = () => {
     if (currentQuestion === questions.length - 1) {
-      setIsQuizCompleted(true); 
+      setIsQuizCompleted(true);
     } else {
       setCurrentQuestion(currentQuestion + 1);
       setOptionsDisabled(false);
@@ -158,32 +102,47 @@ const QuestionCard = () => {
   const currentPlayer = isPlayer1Turn ? player1Name : player2Name;
   const currentScore = isPlayer1Turn ? player1Score : player2Score;
   const difficultyLevel =
-    questions.length > 0 ? questions[currentQuestion].difficultyLevelId.level : "Medium";
+    questions.length > 0
+      ? questions[currentQuestion].difficultyLevelId.level
+      : "Medium";
 
   const getOptionClass = (option) => {
-    if (!showCorrectAnswer) return classes.neutral;
+    if (!showCorrectAnswer) return {};
 
     if (option === questions[currentQuestion].correctAnswer) {
-      return classes.correct;
+      return { backgroundColor: "lightgreen" };
     }
 
-    if (selectedOption === option && option !== questions[currentQuestion].correctAnswer) {
-      return classes.incorrect;
+    if (
+      selectedOption === option &&
+      option !== questions[currentQuestion].correctAnswer
+    ) {
+      return { backgroundColor: "lightcoral" };
     }
 
-    return classes.neutral;
+    return {};
   };
 
   if (isQuizCompleted) {
-   
     return (
-      <div className={classes.backgroundImage}>
-        <Card className={classes.cardContainer}>
+      <div
+        style={{
+          backgroundImage:
+            "url(https://images.pexels.com/photos/34225/spider-web-with-water-beads-network-dewdrop.jpg?cs=srgb&dl=pexels-pixabay-34225.jpg&fm=jpg)",
+          backgroundSize: "cover",
+          height: "100vh",
+          width: "100vw",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <Card sx={{ width: 500, height: 280, margin: "auto" }}>
           <CardContent>
             <Typography variant="h6" component="p">
               Quiz Completed!
             </Typography>
-            <br /> <br /><br />
+            <br /> <br />
             <Button
               variant="contained"
               color="primary"
@@ -195,7 +154,7 @@ const QuestionCard = () => {
               variant="contained"
               color="secondary"
               onClick={endGame}
-              style={{ marginLeft: "10px" }}
+              sx={{ marginLeft: "10px" }}
             >
               End Game
             </Button>
@@ -206,27 +165,70 @@ const QuestionCard = () => {
   }
 
   return (
-    <div className={classes.backgroundImage}>
-      <Typography className={classes.playerName}>{currentPlayer}</Typography>
+    <div
+      style={{
+        backgroundImage:
+          "url(https://images.pexels.com/photos/34225/spider-web-with-water-beads-network-dewdrop.jpg?cs=srgb&dl=pexels-pixabay-34225.jpg&fm=jpg)",
+        backgroundSize: "cover",
+        height: "100vh",
+        width: "100vw",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <Typography
+        sx={{
+          position: "absolute",
+          top: 20,
+          left: 20,
+          color: "white",
+          fontSize: "20px",
+          fontWeight: "bold",
+        }}
+      >
+        {currentPlayer}
+      </Typography>
 
-      <Typography className={classes.playerScore}>
+      <Typography
+        sx={{
+          position: "absolute",
+          top: 20,
+          right: 20,
+          color: "white",
+          fontSize: "20px",
+          fontWeight: "bold",
+        }}
+      >
         Score: {currentScore}
       </Typography>
 
-      <Typography className={classes.difficultyLevel}>
+      <Typography
+        sx={{
+          position: "absolute",
+          top: 20,
+          left: "50%",
+          transform: "translateX(-50%)",
+          color: "white",
+          fontSize: "20px",
+          fontWeight: "bold",
+        }}
+      >
         Difficulty: {difficultyLevel}
       </Typography>
 
-      <Card className={classes.cardContainer}>
+      <Card sx={{ width: 500, height: 280, margin: "auto" }}>
         <CardContent>
           {questions.length > 0 && (
             <div key={questions[currentQuestion]._id}>
               <Typography variant="body1" component="p">
                 {questions[currentQuestion].question}
               </Typography>
+              <br />
+              <br />
               <div>
                 {questions[currentQuestion].options.map((option, index) => (
-                  <div key={index} className={getOptionClass(option)}>
+                  <div key={index} style={getOptionClass(option)}>
                     <label>
                       <input
                         type="checkbox"
@@ -241,6 +243,7 @@ const QuestionCard = () => {
               </div>
             </div>
           )}
+          <br />
           <Button
             variant="contained"
             color="primary"

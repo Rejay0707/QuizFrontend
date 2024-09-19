@@ -1,37 +1,35 @@
 import React, { useState } from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import { styled } from "@mui/material/styles";
 import {
   Card,
   CardContent,
   TextField,
   Typography,
   Button,
-} from "@material-ui/core";
+} from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setPlayerName } from "../Slices/PlayersNameSlice.js";
 import { setPlayer2Name } from "../Slices/Player2NameSlice.js";
 
-const useStyles = makeStyles((theme) => ({
-  backgroundImage: {
-    backgroundImage:
-      "url(https://www.shutterstock.com/image-vector/pink-purple-luminous-beehive-background-260nw-2238492681.jpg)",
-    backgroundSize: "cover",
-    height: "100vh",
-    width: "100vw",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  cardContainer: {
-    width: 500,
-    height: 280,
-    margin: "auto",
-  },
+const BackgroundImage = styled("div")(({ theme }) => ({
+  backgroundImage:
+    "url(https://www.shutterstock.com/image-vector/pink-purple-luminous-beehive-background-260nw-2238492681.jpg)",
+  backgroundSize: "cover",
+  height: "100vh",
+  width: "100vw",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+}));
+
+const CardContainer = styled(Card)(({ theme }) => ({
+  width: 500,
+  height: 280,
+  margin: "auto",
 }));
 
 const PlayersDetailsCard = () => {
-  const classes = useStyles();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [playerName1, setPlayerName1] = useState("");
@@ -59,8 +57,8 @@ const PlayersDetailsCard = () => {
   };
 
   return (
-    <div className={classes.backgroundImage}>
-      <Card className={classes.cardContainer}>
+    <BackgroundImage>
+      <CardContainer>
         <CardContent>
           <Typography variant="h5" component="h2">
             Players Details
@@ -68,19 +66,19 @@ const PlayersDetailsCard = () => {
           <br />
           <TextField
             id="player1"
-            label="Player1Name"
+            label="Player 1 Name"
             variant="filled"
             onChange={handleTextFieldChange}
-            style={{ width: 400 }}
+            fullWidth
           />
           <br />
           <br />
           <TextField
             id="player2"
-            label="Player2Name"
+            label="Player 2 Name"
             variant="filled"
             onChange={handleTextFieldChange}
-            style={{ width: 400 }}
+            fullWidth
           />
           <br />
           <br />
@@ -93,8 +91,8 @@ const PlayersDetailsCard = () => {
             Submit
           </Button>
         </CardContent>
-      </Card>
-    </div>
+      </CardContainer>
+    </BackgroundImage>
   );
 };
 
