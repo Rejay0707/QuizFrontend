@@ -6,6 +6,7 @@ const BackgroundImage = styled("div")({
   backgroundImage:
     "url(https://t3.ftcdn.net/jpg/07/15/23/68/360_F_715236810_kDGrtaSmkNp1WTZFx0vlzS7GKzfVH1yQ.jpg)",
   backgroundSize: "cover",
+  backgroundPosition: "center",
   height: "100vh",
   width: "100vw",
   display: "flex",
@@ -21,7 +22,7 @@ const CardContainer = styled(Card)({
 
 const WelcomeCard = ({ onGetStarted }) => {
   return (
-    <BackgroundImage>
+    <BackgroundImage >
       <CardContainer>
         <CardContent>
           <Typography variant="h5" component="h2">

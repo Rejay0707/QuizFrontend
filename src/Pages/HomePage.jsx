@@ -4,7 +4,7 @@ import BackgroundImage from "../Container/HomeContainer.jsx";
 
 const HomePage = () => {
   return (
-    <Container maxWidth="lg" style={{ padding: 0 }}>
+    <Container maxWidth="lg" style={{ padding: 0,marginLeft:0 }}>
       <BackgroundImage />
     </Container>
   );
